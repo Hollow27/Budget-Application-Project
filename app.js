@@ -10,7 +10,6 @@ So that other functions and modules can use them. And this is called data encaps
 var budgetController = (function() {
 
 
-
 })();
 
 // UI Controller
@@ -22,7 +21,13 @@ var UIController = (function () {
      that data and since we're talking about the UI, it should be done in the UI Controller.
   */
 
-  // var DOMstings = {}
+var DOMstrings = {
+    inputType: '.add__type',
+    inputDescription: '.add__description',
+    inputValue: '.add__value',
+    inputBtn: '.add__btn'
+
+};
 
 
   /* we'll write a fn that we want to use in the other controller = public. This code will execute immediately
@@ -33,20 +38,27 @@ var UIController = (function () {
   return {
     getInput: function() {
         return {
-          type: document.querySelector('.add__type').value, // will be either inc or expense
-          description: document.querySelector('.add__description').value,
-          value: document.querySelector('.add__value').value
+          type: document.querySelector(DOMstrings.inputType).value, // will be either inc or expense
+          description: document.querySelector(DOMstrings. inputDescription).value,
+          value: document.querySelector(DOMstrings.inputValue).value
         };
         // reading value of type. WE have the three input types stored in these three variables
         /* The controller is going to call this method and it wants receive all of these values.
         So we have to return something here. How do we return three values at the same time. The best thing to do is simply return an object
         containing these three as properties. Instead of having three seperate variables. We should return an objet with three properties which are these three.
         */
+    },
 
-
+    /* Since we have a string in the global app controller, we need to change that as well. However
+       However, the DOMstrings object we created is in the UI controller. What we can do is pass that
+       object (DOMstrings) from the module to this one. We'll create something like the getInput method and create
+       getDOMstrings. All we need in this function in this method here is to return our private DOMstrings into
+       public scope.
+    */
+    getDOMstrings: function() {
+        return DOMstrings;
     }
   };
-
 
 })();
 
@@ -59,6 +71,10 @@ where I want ot control for each event and delegate to each controller.
 
 // Global App Controller
 var appController = (function(budgetCtrl, UICtrl){
+
+  // We can now come down here into our global app controller and have appController gain access to the DOMstrings.
+
+  var DOM = UICtrl.getDOMstrings();
 
   var ctrlAddItem = function() {
 
@@ -76,7 +92,7 @@ var appController = (function(budgetCtrl, UICtrl){
 
   }
 
-  document.querySelector('.add__btn').addEventListener('click', ctrlAddItem);
+  document.querySelector(DOM.inputBtn).addEventListener('click', ctrlAddItem);
 
   document.addEventListener('keypress', function(event) {
       if (event.keyCode === 13 || even.which === 13) {
