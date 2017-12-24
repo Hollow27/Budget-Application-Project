@@ -16,6 +16,15 @@ var budgetController = (function() {
 // UI Controller
 var UIController = (function () {
 
+  /* We're starting to have a lot of strings with the querySelector which is a problem.
+     Imagine we make changes to the class names in the UI, then we would have to change the
+     strings manually which could be expensive. Lets create an object where we store all of
+     that data and since we're talking about the UI, it should be done in the UI Controller.
+  */
+
+  // var DOMstings = {}
+
+
   /* we'll write a fn that we want to use in the other controller = public. This code will execute immediately
      and then the obj will return and be assigned in the UI Controller and the var and functions defined will stay
      in the closre even after the fn returns. The object that returns from this will have access to these private methods,
