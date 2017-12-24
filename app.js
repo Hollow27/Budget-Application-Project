@@ -22,16 +22,19 @@ var UIController = (function () {
      functions and variables.
   */
   return {
-    getinput: function() {
+    getInput: function() {
+        return {
+          type: document.querySelector('.add__type').value, // will be either inc or expense
+          description: document.querySelector('.add__description').value,
+          value: document.querySelector('.add__value').value
+        };
         // reading value of type. WE have the three input types stored in these three variables
         /* The controller is going to call this method and it wants receive all of these values.
         So we have to return something here. How do we return three values at the same time. The best thing to do is simply return an object
         containing these three as properties. Instead of having three seperate variables. We should return an objet with three properties which are these three.
         */
 
-        var type = document.querySelector('.add__type').value; // will be either inc or expense
-        var description = document.querySelector('.add__description').value;
-        var value = document.querySelector('.add__value').value;
+
     }
   };
 
@@ -52,11 +55,15 @@ var appController = (function(budgetCtrl, UICtrl){
 
     // TO DO LIST:
     // When someone hits the button
+
+      var input = UICtrl.getInput();
+      console.log(input);
     // We want the field input Data
     // Add the item to the budget Controller
     // Add the new item to the User Interface
     // Calculate the budget
     // Then Display the budget on the UI
+
 
   }
 
