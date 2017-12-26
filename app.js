@@ -23,6 +23,19 @@ var budgetController = (function() {
       this.value = value;
     };
 
+    /* We need a data structure to keep track of the budget itself and the percentages
+       We should always aim to aggregate large amounts of information into one data strcuture.
+    */
+    var data = {
+        allItems: {
+          exp: [],
+          inc: []
+        },
+        totals: {
+          exp = 0,
+          inc = 0
+        }
+    }
 
 })();
 
