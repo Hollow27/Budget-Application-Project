@@ -44,8 +44,11 @@ var budgetController = (function() {
           // [1, 2, 3, 4, 5,], next ID = 6
           // We want the ID = last ID + 1. No redundancy
           // Create new ID
-          ID = data.allItems[type][data.allItems[type].length - 1].id + 1;
-
+          if(data.allItems[type].length > 0) {
+            ID = data.allItems[type][data.allItems[type].length - 1].id + 1;
+          } else {
+            ID = 0;
+          }
           // Create new item based on 'inc' or 'exp' type
           if (type === 'exp') {
             newItem new Expense(ID, des, val);
@@ -155,14 +158,16 @@ var appController = (function(budgetCtrl, UICtrl){
 
   // function when we want to add a new item
   var ctrlAddItem = function() {
-
+    var input, newItem;
     // TO DO LIST:
-    // When someone hits the button
+    // When someone hits the button, we want the field input Data
 
-      var input = UICtrl.getInput();
+      input = UICtrl.getInput();
 
-    // We want the field input Data
     // Add the item to the budget Controller
+
+      newItem = budgetCtrl.addItem(input.type, input.description, input.value);
+
     // Add the new item to the User Interface
     // Calculate the budget
     // Then Display the budget on the UI
