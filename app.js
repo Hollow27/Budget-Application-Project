@@ -169,6 +169,9 @@ var appController = (function(budgetCtrl, UICtrl){
       newItem = budgetCtrl.addItem(input.type, input.description, input.value);
 
     // Add the new item to the User Interface
+
+      UICtrl.addListItem(newItem, input.type);
+
     // Calculate the budget
     // Then Display the budget on the UI
   };
